@@ -82,7 +82,9 @@ GlyphAtlas.prototype.addGlyph = function(id, name, glyph, buffer) {
     // into 2 bytes rather than 4 bytes.
     packWidth += (4 - packWidth % 4);
     packHeight += (4 - packHeight % 4);
-
+    // console.log(packWidth)
+    // console.log('packwidth above')
+    // console.log(packHeight)
     var rect = this.bin.packOne(packWidth, packHeight);
     if (!rect) {
         this.resize();
@@ -117,7 +119,7 @@ GlyphAtlas.prototype.resize = function() {
 
     // For now, don't grow the atlas beyond 1024x1024 because of how
     // texture coords pack into unsigned byte in symbol bucket.
-    if (origw > 512 || origh > 512) return;
+    if (origw > 1024 || origh > 1024) return;
 
     if (this.texture) {
         if (this.gl) {
