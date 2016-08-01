@@ -31,6 +31,11 @@ GlyphSource.prototype.getSimpleGlyphs = function(fontstack, glyphIDs, uid, callb
         this.atlases[fontstack] = new GlyphAtlas(128, 128);
     }
 
+    console.log(fontstack);
+    console.log('fontstack is here!!!!!!!!!!!!!!!')
+    //logs Noto Sans CJK TC Regular,Arial Unicode MS Regular
+// glyph_source.js:22 fontstack is here!!!!!!!!!!!!!!!
+
     var glyphs = {};
     var stack = this.stacks[fontstack];
     var atlas = this.atlases[fontstack];
