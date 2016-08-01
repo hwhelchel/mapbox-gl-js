@@ -69,7 +69,7 @@ module.exports._createProgramCached = function(name, defines, vertexPragmas, fra
     return this.cache[key];
 };
 
-module.exports.useProgram = function(nextProgramName, defines, vertexPragmas, fragmentPragmas) {
+module.exports.bindProgram = function(nextProgramName, defines, vertexPragmas, fragmentPragmas) {
     var gl = this.gl;
 
     defines = defines || [];

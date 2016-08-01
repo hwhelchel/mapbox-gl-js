@@ -77,7 +77,7 @@ function drawFill(painter, source, layer, coord) {
             programOptions.vertexPragmas,
             programOptions.fragmentPragmas
         );
-        bucket.setUniforms(gl, 'fill', program, layer, {zoom: painter.transform.zoom});
+        painter.setUniforms(bucket.getUniforms('fill', program, layer, {zoom: painter.transform.zoom}));
 
     } else {
         // Draw texture fill
@@ -131,7 +131,7 @@ function drawStroke(painter, source, layer, coord) {
         );
         gl.uniform2f(program.u_world, gl.drawingBufferWidth, gl.drawingBufferHeight);
         gl.uniform1f(program.u_opacity, opacity);
-        bucket.setUniforms(gl, 'fill', program, layer, {zoom: painter.transform.zoom});
+        painter.setUniforms(bucket.getUniforms('fill', program, layer, {zoom: painter.transform.zoom}));
     }
 
     gl.uniformMatrix4fv(program.u_matrix, false, painter.translatePosMatrix(

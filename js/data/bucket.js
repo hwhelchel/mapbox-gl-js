@@ -203,13 +203,15 @@ Bucket.prototype.getTransferables = function(transferables) {
     }
 };
 
-Bucket.prototype.setUniforms = function(gl, programName, program, layer, globalProperties) {
+Bucket.prototype.getUniforms = function(programName, program, layer, globalProperties) {
     var uniforms = this.paintAttributes[programName][layer.id].uniforms;
+
+    var output = {};
     for (var i = 0; i < uniforms.length; i++) {
         var uniform = uniforms[i];
-        var uniformLocation = program[uniform.name];
-        gl['uniform' + uniform.components + 'fv'](uniformLocation, uniform.getValue(layer, globalProperties));
+        output[uniform.name] = uniform.getValue(layer, globalProperties);
     }
+    return output;
 };
 
 Bucket.prototype.serialize = function() {

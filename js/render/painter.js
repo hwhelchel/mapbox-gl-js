@@ -38,6 +38,7 @@ function Painter(gl, transform) {
     this.depthEpsilon = 1 / Math.pow(2, 16);
 
     this.lineWidthRange = gl.getParameter(gl.ALIASED_LINE_WIDTH_RANGE);
+    this.currentUniforms = {};
 }
 
 util.extend(Painter.prototype, require('./painter/use_program'));
@@ -338,5 +339,29 @@ Painter.prototype.showOverdrawInspector = function(enabled) {
         gl.clear(gl.COLOR_BUFFER_BIT);
     } else {
         gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+    }
+};
+
+Painter.prototype.setUniforms = function(uniforms) {
+    var gl = this.gl;
+    for (var name in uniforms) {
+        var value = uniforms[name];
+        if (this.currentUniforms[name] !== value) {
+            var location = this.currentProgram[name];
+            if (Array.isArray(value)) {
+                if (value.length === 1) {
+                    gl.uniform1fv(location, value);
+                } else if (value.length === 2) {
+                    gl.uniform2fv(location, value);
+                } else if (value.length === 3) {
+                    gl.uniform3fv(location, value);
+                } else if (value.length === 4) {
+                    gl.uniform4fv(location, value);
+                }
+            } else {
+                gl.uniform1f(location, value);
+            }
+            this.currentUniforms[name] = value;
+        }
     }
 };

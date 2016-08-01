@@ -372,6 +372,15 @@ exports.mapObject = function(input, iterator, context) {
     return output;
 };
 
+exports.mapObjectKeys = function(input, iterator, context) {
+    var output = {};
+    for (var key in input) {
+        var value = input[key];
+        output[iterator.call(context || this, value, key, input)] = value;
+    }
+    return output;
+};
+
 /**
  * Create an object by filtering out values of an existing object
  * @param {Object} input

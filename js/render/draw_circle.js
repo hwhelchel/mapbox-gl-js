@@ -52,7 +52,7 @@ function drawCircles(painter, source, layer, coords) {
             layer.paint['circle-translate-anchor']
         ));
 
-        bucket.setUniforms(gl, 'circle', program, layer, {zoom: painter.transform.zoom});
+        painter.setUniforms(bucket.getUniforms('circle', program, layer, {zoom: painter.transform.zoom}));
 
         for (var k = 0; k < bufferGroups.length; k++) {
             var group = bufferGroups[k];
