@@ -84,9 +84,7 @@ GlyphAtlas.prototype.addGlyph = function(id, name, glyph, buffer) {
     // into 2 bytes rather than 4 bytes.
     packWidth += (4 - packWidth % 4);
     packHeight += (4 - packHeight % 4);
-    // console.log(packWidth)
-    // console.log('packwidth above')
-    // console.log(packHeight)
+
     var rect = this.bin.packOne(packWidth, packHeight);
     if (!rect) {
         this.resize();
