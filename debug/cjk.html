@@ -42,7 +42,7 @@ map.addControl(new mapboxgl.Navigation());
 map.on('load', function () {
     map.addSource("points", {
         "type": "geojson",
-        "data": 'https://raw.githubusercontent.com/mapbox/mapbox-gl-test-suite/cjk-overflow/data/cjkPts.geojson'
+        "data": 'mapbox-gl-test-suite/cjk-overflow/data/cjkPts.geojson'
     });
 
     map.addLayer({

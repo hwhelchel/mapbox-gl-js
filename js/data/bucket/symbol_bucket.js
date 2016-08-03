@@ -61,18 +61,19 @@ var layoutVertexArrayType = new Bucket.VertexArrayType([{
     type: 'Int16'
 }, {
     name: 'a_data1',
-    components: 4,
+    components: 2,
     type: 'Uint16'
 }, {
     name: 'a_data2',
-    components: 2,
-    type: 'Uint16'
+    components: 4,
+    type: 'Uint8'
 }]);
 
 var elementArrayType = new Bucket.ElementArrayType();
 
 function addVertex(array, x, y, ox, oy, tx, ty, minzoom, maxzoom, labelminzoom, labelangle) {
     return array.emplaceBack(
+
             // pos
             x,
             y,
@@ -82,9 +83,9 @@ function addVertex(array, x, y, ox, oy, tx, ty, minzoom, maxzoom, labelminzoom, 
             // data1
             tx / 4,                   // tex
             ty / 4,                   // tex
+            // data2
             (labelminzoom || 0) * 10, // labelminzoom
             labelangle,               // labelangle
-            // data2
             (minzoom || 0) * 10,               // minzoom
             Math.min(maxzoom || 25, 25) * 10); // minzoom
 }

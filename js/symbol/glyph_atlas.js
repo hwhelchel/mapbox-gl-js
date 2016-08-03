@@ -2,6 +2,8 @@
 
 var ShelfPack = require('shelf-pack');
 var util = require('../util/util');
+const GLYPH_ATLAS_DIM = 2048;
+//GLYPH_ATLAS_DIM are the maximum dimensions of the glyph atlas texture sheet
 
 module.exports = GlyphAtlas;
 function GlyphAtlas(width, height) {
@@ -115,8 +117,7 @@ GlyphAtlas.prototype.resize = function() {
     var origw = this.width,
         origh = this.height;
 
-    // Grow atlas to 2048 for CJK characters
-    if (origw > 1024 || origh > 1024) return;
+    if (origw > GLYPH_ATLAS_DIM || origh > GLYPH_ATLAS_DIM) return;
 
     if (this.texture) {
         if (this.gl) {
