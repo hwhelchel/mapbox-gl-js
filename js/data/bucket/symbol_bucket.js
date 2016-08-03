@@ -73,7 +73,6 @@ var elementArrayType = new Bucket.ElementArrayType();
 
 function addVertex(array, x, y, ox, oy, tx, ty, minzoom, maxzoom, labelminzoom, labelangle) {
     return array.emplaceBack(
-
             // pos
             x,
             y,

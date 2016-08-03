@@ -116,7 +116,8 @@ GlyphAtlas.prototype.addGlyph = function(id, name, glyph, buffer) {
 GlyphAtlas.prototype.resize = function() {
     var origw = this.width,
         origh = this.height;
-
+    // Dimensions of glyph atlas are set here
+    // The dimensions rely on the way texture coords pack into unsigned bytes in symbol bucket.
     if (origw > GLYPH_ATLAS_DIM || origh > GLYPH_ATLAS_DIM) return;
 
     if (this.texture) {
