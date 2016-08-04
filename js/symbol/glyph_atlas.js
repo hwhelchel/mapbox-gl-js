@@ -2,11 +2,7 @@
 
 var ShelfPack = require('shelf-pack');
 var util = require('../util/util');
-<<<<<<< ca46faab55edf3d1122fe92f338e39a951f90f77
 const GLYPH_ATLAS_DIM = 1024;
-=======
-const GLYPH_ATLAS_DIM = 2048;
->>>>>>> change array construction, cleanup
 //GLYPH_ATLAS_DIM are the maximum dimensions of the glyph atlas texture sheet
 
 module.exports = GlyphAtlas;
