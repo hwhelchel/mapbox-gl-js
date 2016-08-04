@@ -131,15 +131,15 @@ GlyphAtlas.prototype.resize = function() {
         this.texture = null;
     }
 
-    this.width *= 2;
-    this.height *= 2;
+    this.width *= 4;
+    this.height *= 4;
     this.bin.resize(this.width, this.height);
 
     var buf = new ArrayBuffer(this.width * this.height),
         src, dst;
     for (var i = 0; i < origh; i++) {
         src = new Uint8Array(this.data.buffer, origh * i, origw);
-        dst = new Uint8Array(buf, origh * i * 2, origw);
+        dst = new Uint8Array(buf, origh * i * 4, origw);
         dst.set(src);
     }
     this.data = new Uint8Array(buf);
