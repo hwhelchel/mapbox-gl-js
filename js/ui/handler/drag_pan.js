@@ -77,6 +77,10 @@ DragPanHandler.prototype = {
     _onDown: function (e) {
         if (this._ignoreEvent(e)) return;
         if (this.isActive()) return;
+        if (!this._enabled) {
+            this._inertia = [];
+            return;
+        };
 
         if (e.touches) {
             document.addEventListener('touchmove', this._onMove);
@@ -93,6 +97,10 @@ DragPanHandler.prototype = {
 
     _onMove: function (e) {
         if (this._ignoreEvent(e)) return;
+         if (!this._enabled) {
+            this._inertia = [];
+            return;
+        };
 
         if (!this.isActive()) {
             this._active = true;
