@@ -22,7 +22,8 @@ function main() {
         'query-point': require('./benchmarks/query_point'),
         'query-box': require('./benchmarks/query_box'),
         'geojson-setdata-small': require('./benchmarks/geojson_setdata_small'),
-        'geojson-setdata-large': require('./benchmarks/geojson_setdata_large')
+        'geojson-setdata-large': require('./benchmarks/geojson_setdata_large'),
+        'worker-tile-memory': require('./benchmarks/worker_tile_memory')
     };
 
     var benchmarksDiv = document.getElementById('benchmarks');
