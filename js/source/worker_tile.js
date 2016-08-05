@@ -211,7 +211,7 @@ WorkerTile.prototype.parse = function(data, layerFamilies, actor, rawTileData, c
         var transferables = [rawTileData].concat(featureIndex_.transferables).concat(collisionTile_.transferables);
         var nonEmptyBuckets = buckets.filter(isBucketNonEmpty);
 
-        callback(null, {
+        var result = {
             buckets: nonEmptyBuckets.map(serializeBucket),
             featureIndex: featureIndex_.data,
             collisionTile: collisionTile_.data,
@@ -219,7 +219,12 @@ WorkerTile.prototype.parse = function(data, layerFamilies, actor, rawTileData, c
             symbolInstancesArray: symbolInstancesArray,
             symbolQuadsArray: symbolQuadsArray,
             rawTileData: rawTileData
-        }, getTransferables(nonEmptyBuckets).concat(transferables));
+        };
+        transferables = getTransferables(nonEmptyBuckets).concat(transferables);
+        // unreference the arraygroups whose buffers we're transferring away so
+        // that they don't consume unnecessary memory.
+        nonEmptyBuckets.forEach(function (b) { b.arrayGroups = {}; });
+        callback(null, result, transferables);
     }
 };
 
@@ -253,10 +258,7 @@ WorkerTile.prototype.updateProperties = function(data, layerFamilies, actor, cal
         if (!bucket.updateFeatureProperties) continue;
 
         // clear out previous array groups
-        for (var programName in bucket.arrayGroups) {
-            bucket.arrayGroups[programName] = [];
-        }
-
+        bucket.createArrays();
         var properties = data[bucket.layer.sourceLayer];
         bucket.updateFeatureProperties(properties || []);
         updatedBuckets.push(bucket);
@@ -274,9 +276,12 @@ WorkerTile.prototype.updateProperties = function(data, layerFamilies, actor, cal
         }
 
         var nonEmptyBuckets = updatedBuckets.filter(isBucketNonEmpty);
-        callback(null, {
-            buckets: nonEmptyBuckets.map(serializeBucket)
-        }, getTransferables(nonEmptyBuckets));
+        var result = { buckets: nonEmptyBuckets.map(serializeBucket) };
+        var transferables = getTransferables(nonEmptyBuckets);
+        // unreference the arraygroups whose buffers we're transferring away so
+        // that they don't consume unnecessary memory.
+        nonEmptyBuckets.forEach(function (b) { b.arrayGroups = {}; });
+        callback(null, result, transferables);
     }
 };
 
