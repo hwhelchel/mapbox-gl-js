@@ -60,7 +60,7 @@ var layoutVertexArrayType = new Bucket.VertexArrayType([{
     components: 2,
     type: 'Int16'
 }, {
-    name: 'a_data1',
+    name: 'a_texture_pos',
     components: 2,
     type: 'Uint16'
 }, {
@@ -79,7 +79,7 @@ function addVertex(array, x, y, ox, oy, tx, ty, minzoom, maxzoom, labelminzoom, 
             // offset
             Math.round(ox * 64), // use 1/64 pixels for placement
             Math.round(oy * 64),
-            // data1, x y coordinates of where to find symbol on texture
+            // a_texture_pos, x y coordinates of where to find symbol on texture
             tx / 4,                   // tex
             ty / 4,                   // tex
             // data2
